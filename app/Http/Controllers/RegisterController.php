@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -20,8 +21,8 @@ class RegisterController extends Controller
             'password' => ['required','min:7'],
         ]);
 
-        User::create($attributes);
-        // session()->flash('success', 'Your account has been created.');
+        $user = User::create($attributes);
+        auth()->login($user);
         return redirect('/')->with('success', 'Your account has been created.');;
     }
     
