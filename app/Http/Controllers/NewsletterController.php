@@ -19,7 +19,6 @@ class NewsletterController extends Controller
             ]);
         }
         
-        
         return redirect('/')->with('success', 'Your are now signed up for our newsletter');
     } 
 }
