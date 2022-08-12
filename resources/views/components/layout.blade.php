@@ -24,15 +24,23 @@
 
             <div class="md:mt-0 mt-8 flex item-center">
                 @auth
-                <span class="text-xs font-bold uppercase">Welcome, {{ auth()->user()->name }}!</span>
+                    <x-dropdown>
+                        <x-slot name="trigger">
+                            <button class="font-bold mt-3 text-xs uppercase">Welcome, {{ auth()->user()->name }}!</button>
+                        </x-slot>
 
-                <form method="POST" action="/logout" class="text-xs font-semibold text-blue-500 ml-6">
+                        <x-dropdown-item href="/admin/posts" :active="request()->is('admin/posts')">All Posts</x-dropdown-item>
+                        <x-dropdown-item href="/admin/posts/create" :active="request()->is('admin/posts/create')">New Post</x-dropdown-item>
+                        <x-dropdown-item href="#" x-data="{}" @click.prevent="document.querySelector('#logout-form').submit()">Log Out</x-dropdown-item>
+
+                    </x-dropdown>
+
+                <form id="logout-form" method="POST" action="/logout" class="hidden">
                     @csrf
-                    <button type="submit">Log Out</button>
                 </form>
                 @else
-                <a href="/register" class="font-bold mt-3 text-xs uppercase">Register</a>
-                <a href="/login" class="ml-6 font-bold mt-3 text-xs uppercase">Login</a>
+                    <a href="/register" class="font-bold mt-3 text-xs uppercase">Register</a>
+                    <a href="/login" class="ml-6 font-bold mt-3 text-xs uppercase">Login</a>
                 @endauth
 
                 <a href="#newsletter"
