@@ -26,6 +26,8 @@ class PostController extends Controller
 
     public function store(){
 
+        ddd(request()->file('thumbnail')->store('thumbnails'));
+
         $attributes = request()->validate([
             'title' => ['required'],
             'thumbnail' => ['required', 'image'],
@@ -36,7 +38,7 @@ class PostController extends Controller
         ]);
 
         $attributes['user_id'] = auth()->id();
-        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnail');
+        $attributes['thumbnail'] = request()->file('thumbnail')->store('thumbnails');
 
         Post::create($attributes);
         return redirect('/')->with('success', 'Your succesfully submitted a post.');
