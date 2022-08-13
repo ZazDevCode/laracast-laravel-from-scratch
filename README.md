@@ -6,4 +6,4 @@ I followed this series to better understand the basic concept of the Laravel fra
 
 ## Course contents
 
-...
+https://laracasts.com/series/laravel-8-from-scratch
